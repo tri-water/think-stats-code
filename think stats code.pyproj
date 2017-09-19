@@ -23,6 +23,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="nsfg.py" />
+    <Compile Include="mystats.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="thinkplot.py" />
     <Compile Include="thinkstats2.py" />
   </ItemGroup>
