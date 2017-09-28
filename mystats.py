@@ -25,5 +25,44 @@ def Mode(hist_data):
     dict = hist_data.GetDict()
     return max(hist_data, key=dict.get)
 
-   
+def AllModes(hist_data):
+    """
+    :hist_data: a Hist
+    :return: a list of value-frequency pairs in descending order of frequency
+    """
+    import operator
+    dict = hist_data.GetDict()
+    return sorted(dict.items(), key=operator.itemgetter(1), reverse=True)
+
+def BiasPmf(pmf, label):
+    """
+    compute the bias pmf caused by the size of each catogory
+    :pmf: a Pmf
+    :label: a string
+    :return: a Pmf of the bias pmf
+    """
+    new_pmf = pmf.Copy(label=label)
+
+    for x, p in pmf.Items():
+        new_pmf.Mult(x, x) # the firt argument is the key, the seond argument is the fator
+
+    new_pmf.Normalize()
+    return new_pmf
+
+def UnbiasPmf(pmf, label):
+    """
+    compute pmf from a bias pmf
+    :pmf: a Pmf of the bias pmf
+    :label: a string
+    :return: a Pmf of the unbias pmf
+    """
+    new_pmf = pmf.Copy(label=label)
+
+    for x, p in pmf.Items():
+        new_pmf.Mult(x, 1/x)
+
+    new_pmf.Normalize()
+    return new_pmf
+
+
 
