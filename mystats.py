@@ -15,5 +15,15 @@ def CohenEffectSize(group1, group2):
     pooled_var = (n1*var1 + n2*var2)/(n1 + n2)
     d = diff/math.sqrt(pooled_var)
     return d
+
+def Mode(hist_data):
+    """
+    This function find the mode from hist_data
+    :hist_data: a Hist
+    :return: the key appearing most frequently
+    """
+    dict = hist_data.GetDict()
+    return max(hist_data, key=dict.get)
+
    
 
